@@ -26,7 +26,7 @@ public class Main {
             }
             listOfEdges.put(src, list);
         }
-        Vector<Integer> paths = Dijkstra.findBestPaths(listOfEdges, numberOfVertexes.size());
+        List<Integer> paths = Dijkstra.findBestPaths(listOfEdges, numberOfVertexes.size());
         for (int i = 0; i < paths.size(); ++i) {
             System.out.println((i + 1) + " " + paths.get(i));
         }

@@ -1,21 +1,16 @@
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class Dijkstra {
 
-    static Vector<Integer> findBestPaths(Map<Integer, List<EdgeDirection>> listOfEdges, Integer n) {
-        Vector<Integer> paths = new Vector<>();
-        Vector<Boolean> vertexIsVisited = new Vector<>();
-
-        paths.setSize(n);
-        vertexIsVisited.setSize(n);
-        paths.set(0, 0);
-        vertexIsVisited.set(0, false);
-        for (int i = 1; i < n; ++i) {
-            paths.set(i, Integer.MAX_VALUE / 2);
-            vertexIsVisited.set(i, false);
-        }
+    static List<Integer> findBestPaths(Map<Integer, List<EdgeDirection>> listOfEdges, Integer n) {
+        List<Integer> paths = Stream.concat(Stream.of(0), Stream.generate(() -> Integer.MAX_VALUE / 2).limit(n - 1))
+                .collect(Collectors.toList());
+        List<Boolean> vertexIsVisited = Stream.generate(() -> false)
+                .limit(n)
+                .collect(Collectors.toList());
         for (int k = 0; k < n; ++k) {
             Integer v = -1;
             for (int i = 0; i < n; ++i) {
