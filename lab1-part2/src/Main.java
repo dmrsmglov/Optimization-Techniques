@@ -3,23 +3,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class Main {
 
-    @FunctionalInterface
-    interface Function<X1, X2, Y>{
-        Y apply(X1 x1, X2 x2);
-    }
-
-
-    private static Function<Double, Double, Double> derivativeX1 = (Double x1, Double x2)
+    private static BiFunction<Double, Double, Double> derivativeX1 = (x1, x2)
             -> -4 * x2 * x1 + 4 * Math.pow(x1, 2) + Math.pow(x1, 3) - 200 + 200 * x1;
 
-    private static Function<Double, Double, Double> derivativeX2 = (Double x1, Double x2)
+    private static BiFunction<Double, Double, Double> derivativeX2 = (x1, x2)
             -> 2 * x2 - 2 * Math.pow(x1, 2);
 
-    private static Function<Double, Double,  Double> funcToAnalyze = (Double x1, Double x2)
+    private static BiFunction<Double, Double, Double> funcToAnalyze = (x1, x2)
             -> Math.pow(x2 - Math.pow(x1, 2), 2) + 100 * Math.pow(1 - x1, 2);
 
     private static List<Double> derivativeInDirection(Double x1, Double x2) {
@@ -65,9 +60,11 @@ public class Main {
         writer.write("Amount of calculations is " + Integer.toString(amountOfCalculations));
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedWriter gradient = new BufferedWriter(new FileWriter("gradient"));
-        gradientDownhill(gradient);
-        gradient.close();
+    public static void main(String[] args) {
+        try (BufferedWriter gradient = new BufferedWriter(new FileWriter("gradient"))){
+            gradientDownhill(gradient);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
