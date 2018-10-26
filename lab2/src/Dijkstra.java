@@ -5,10 +5,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class Dijkstra {
+    private Map<Integer, List<EdgeDirection>> listOfEdges;
+    private List<Integer> paths;
+    private int n;
 
-    static List<Integer> findBestPaths(Map<Integer, List<EdgeDirection>> listOfEdges, Integer n) {
-        List<Integer> paths = Stream.concat(Stream.of(0), Stream.generate(() -> Integer.MAX_VALUE / 2).limit(n - 1))
+    Dijkstra(Map<Integer, List<EdgeDirection>> listOfEdges, int n) {
+        this.listOfEdges = listOfEdges;
+        this.n = n;
+        paths = Stream.concat(Stream.of(0), Stream.generate(() -> Integer.MAX_VALUE / 2).limit(n - 1))
                 .collect(Collectors.toList());
+    }
+    void findBestPaths() {
         List<Boolean> vertexIsVisited = Stream.generate(() -> false)
                 .limit(n)
                 .collect(Collectors.toList());
@@ -31,6 +38,8 @@ class Dijkstra {
                 }
             }
         }
+    }
+    List<Integer> getPaths(){
         return paths;
     }
 }
