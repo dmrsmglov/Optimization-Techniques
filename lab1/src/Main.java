@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -146,21 +148,25 @@ public class Main {
     }
 
     public static void main(String args[]) throws IOException {
-
-       BufferedWriter dichotomyWriter = new BufferedWriter(new FileWriter("Method of dichotomy"));
-        methodOfDichotomy(dichotomyWriter);
-        dichotomyWriter.close();
-
-        BufferedWriter goldenSectionWriter = new BufferedWriter(new FileWriter("Method of Golden section"));
-        methodOfGoldenSection(goldenSectionWriter);
-        goldenSectionWriter.close();
-
-        BufferedWriter fibonacciWriter = new BufferedWriter(new FileWriter("Method of Fibonacci"));
-        methodOfFibonacci(fibonacciWriter);
-        fibonacciWriter.close();
-
-        BufferedWriter searchOnALineWriter = new BufferedWriter(new FileWriter("Search on a line"));
-        methodOfSearchOnALine(searchOnALineWriter);
-        searchOnALineWriter.close();
+        try (BufferedWriter dichotomyWriter = new BufferedWriter(new FileWriter("Method of dichotomy"))) {
+            methodOfDichotomy(dichotomyWriter);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        try (BufferedWriter goldenSectionWriter = new BufferedWriter(new FileWriter("Method of Golden section"))) {
+            methodOfGoldenSection(goldenSectionWriter);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        try (BufferedWriter fibonacciWriter = new BufferedWriter(new FileWriter("Method of Fibonacci"))) {
+            methodOfFibonacci(fibonacciWriter);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        try (BufferedWriter searchOnALineWriter = new BufferedWriter(new FileWriter("Search on a line"))) {
+            methodOfSearchOnALine(searchOnALineWriter);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
