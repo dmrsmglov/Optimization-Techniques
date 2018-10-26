@@ -1,15 +1,16 @@
  class EdgeDirection {
-    private Integer direction, weight;
-    EdgeDirection(Integer direction, Integer weight) {
+    private int direction;
+    private int weight;
+    EdgeDirection(int direction, int weight) {
         this.direction = direction;
         this.weight = weight;
     }
 
-    Integer getDirection() {
+    int getDirection() {
         return direction;
     }
 
-    Integer getWeight() {
+    int getWeight() {
         return weight;
     }
 }
