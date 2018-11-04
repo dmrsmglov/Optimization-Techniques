@@ -3,7 +3,7 @@ import java.util.ArrayList;
 class Matrix {
     private int n;
     private int m;
-    private ArrayList<ArrayList<Integer>> matrix;
+    private ArrayList<ArrayList<Double>> matrix;
 
     Matrix(int n, int m) {
         this.n = n;
@@ -22,14 +22,21 @@ class Matrix {
         return m;
     }
 
-    int getItem(int i, int j) {
+    double getItem(int i, int j) {
         if (i >= n || j >= m) {
             throw new IndexOutOfBoundsException();
         }
         return matrix.get(i).get(j);
     }
 
-    void addItem(int row, int column, int item) {
+    void setItem(int i, int j, double item) {
+        if (i >= n || j >= m) {
+            throw new IndexOutOfBoundsException();
+        }
+        matrix.get(i).set(j, item);
+    }
+
+    void addItem(int row, int column, double item) {
         if (row >= n || column >= m) {
             throw new IndexOutOfBoundsException();
         }
@@ -37,7 +44,7 @@ class Matrix {
         m++;
     }
 
-    void addItem(int row, int item) {
+    void addItem(int row, double item) {
         if (row >= n) {
             throw new IndexOutOfBoundsException();
         }
@@ -45,8 +52,8 @@ class Matrix {
         m++;
     }
 
-    void addRow(int i, ArrayList<Integer> row) {
-        if (i >= n || row.size() != m) {
+    void addRow(int i, ArrayList<Double> row) {
+        if (row.size() != m) {
             throw new IndexOutOfBoundsException();
         }
         if (i < matrix.size()) {
@@ -58,7 +65,7 @@ class Matrix {
         }
     }
 
-    void addRow(ArrayList<Integer> row) {
+    void addRow(ArrayList<Double> row) {
         if (row.size() != m) {
             throw new IndexOutOfBoundsException();
         }
@@ -66,17 +73,27 @@ class Matrix {
         n++;
     }
 
-    void addColumn(ArrayList<Integer> column) {
-        if (column.size() != matrix.size()) {
+    void addColumn(int numberOfColumn, ArrayList<Double> column) {
+        if (column.size() != matrix.size() || numberOfColumn >= m) {
             throw new IndexOutOfBoundsException();
         }
         for (int i = 0; i < column.size(); ++i) {
-            matrix.get(i).add(column.get(i));
+            matrix.get(i).set(numberOfColumn, column.get(i));
         }
-        m++;
     }
 
-    ArrayList<Integer> getRow(int i) {
+    ArrayList<Double> getColumn(int numberOfColumn) {
+        if (numberOfColumn >= m) {
+            throw new IndexOutOfBoundsException();
+        }
+        ArrayList<Double> column = new ArrayList<>(0);
+        for (int i = 0; i < n; ++i) {
+            column.add(getItem(i, numberOfColumn));
+        }
+        return column;
+    }
+
+    ArrayList<Double> getRow(int i) {
         if (i >= matrix.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -89,7 +106,7 @@ class Matrix {
             throw new IndexOutOfBoundsException();
         }
         for (int i = 0; i < n; ++i) {
-            ArrayList<Integer> currentRow = matrix.get(i);
+            ArrayList<Double> currentRow = matrix.get(i);
             for (int j = 0; j < other.getNumberOfColumns(); ++j) {
                 currentRow.add(other.getItem(i, j));
             }
