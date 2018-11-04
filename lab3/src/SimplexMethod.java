@@ -4,7 +4,6 @@ import java.util.List;
 
 class SimplexMethod {
 
-    private MatrixPrinter matrixPrinter = new MatrixPrinter();
     private MatrixReaderCreator matrixCreator = new MatrixReaderCreator();
     private MatrixCalculator matrixCalculator = new MatrixCalculator();
 
