@@ -29,6 +29,22 @@ class Matrix {
         return matrix.get(i).get(j);
     }
 
+    void addItem(int row, int column, int item) {
+        if (row >= n || column >= m) {
+            throw new IndexOutOfBoundsException();
+        }
+        matrix.get(row).add(column, item);
+        m++;
+    }
+
+    void addItem(int row, int item) {
+        if (row >= n) {
+            throw new IndexOutOfBoundsException();
+        }
+        matrix.get(row).add(item);
+        m++;
+    }
+
     void addRow(int i, ArrayList<Integer> row) {
         if (i >= n || row.size() != m) {
             throw new IndexOutOfBoundsException();
