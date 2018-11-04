@@ -16,7 +16,7 @@ public class MatrixReaderCreator {
                 for (int j = 0; j < m; ++j) {
                     row.set(j, sc.nextInt());
                 }
-                matrix.addRow(row);
+                matrix.addRow(i, row);
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File " + filename + " not found.\n");
