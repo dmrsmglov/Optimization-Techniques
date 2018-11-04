@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 
 class Matrix {
@@ -11,6 +9,9 @@ class Matrix {
         this.n = n;
         this.m = m;
         this.matrix = new ArrayList<>(n);
+        for (int i = 0; i < n; ++i) {
+            matrix.add(new ArrayList<>(m));
+        }
     }
 
     int getNumberOfRows() {
@@ -37,6 +38,7 @@ class Matrix {
         }
         else {
             matrix.add(row);
+            n++;
         }
     }
 
@@ -45,6 +47,7 @@ class Matrix {
             throw new IndexOutOfBoundsException();
         }
         matrix.add(row);
+        n++;
     }
 
     void addColumn(ArrayList<Integer> column) {
@@ -54,6 +57,7 @@ class Matrix {
         for (int i = 0; i < column.size(); ++i) {
             matrix.get(i).add(column.get(i));
         }
+        m++;
     }
 
     ArrayList<Integer> getRow(int i) {
@@ -74,5 +78,6 @@ class Matrix {
                 currentRow.add(other.getItem(i, j));
             }
         }
+        m += other.getNumberOfColumns();
     }
 }
