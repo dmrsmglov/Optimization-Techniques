@@ -147,7 +147,7 @@ public class Main {
                 "Amount of calculations is " + Integer.toString(amountOfCalculations) + "\n");
     }
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String args[]) {
         try (BufferedWriter dichotomyWriter = new BufferedWriter(new FileWriter("Method of dichotomy"))) {
             methodOfDichotomy(dichotomyWriter);
         } catch (IOException ex) {
