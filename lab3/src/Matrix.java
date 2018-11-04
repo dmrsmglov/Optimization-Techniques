@@ -2,7 +2,7 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 
-public class Matrix {
+class Matrix {
     private int n;
     private int m;
     private ArrayList<ArrayList<Integer>> matrix;
@@ -11,6 +11,21 @@ public class Matrix {
         this.n = n;
         this.m = m;
         this.matrix = new ArrayList<>(n);
+    }
+
+    int getNumberOfRows() {
+        return n;
+    }
+
+    int getNumberOfColumns() {
+        return m;
+    }
+
+    int getItem(int i, int j) {
+        if (i >= n || j >= m) {
+            throw new IndexOutOfBoundsException();
+        }
+        return matrix.get(i).get(j);
     }
 
     void addRow(int i, ArrayList<Integer> row) {
@@ -46,5 +61,18 @@ public class Matrix {
             throw new IndexOutOfBoundsException();
         }
         return matrix.get(i);
+    }
+
+
+    void concat(Matrix other) {
+        if (other.getNumberOfRows() != n) {
+            throw new IndexOutOfBoundsException();
+        }
+        for (int i = 0; i < n; ++i) {
+            ArrayList<Integer> currentRow = matrix.get(i);
+            for (int j = 0; j < other.getNumberOfColumns(); ++j) {
+                currentRow.add(other.getItem(i, j));
+            }
+        }
     }
 }
