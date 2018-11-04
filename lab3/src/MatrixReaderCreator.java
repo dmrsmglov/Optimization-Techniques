@@ -12,9 +12,9 @@ public class MatrixReaderCreator {
             int m = sc.nextInt();
             matrix = new Matrix(n, m);
             for (int i = 0; i < n; ++i) {
-                ArrayList<Integer> row = new ArrayList<>(m);
+                ArrayList<Integer> row = new ArrayList<>();
                 for (int j = 0; j < m; ++j) {
-                    row.set(j, sc.nextInt());
+                    row.add(sc.nextInt());
                 }
                 matrix.addRow(i, row);
             }
