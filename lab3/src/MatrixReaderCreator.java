@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MatrixReaderCreator {
@@ -12,7 +13,7 @@ public class MatrixReaderCreator {
             int m = sc.nextInt();
             matrix = new Matrix(n, m);
             for (int i = 0; i < n; ++i) {
-                ArrayList<Double> row = new ArrayList<>();
+                List<Double> row = new ArrayList<>();
                 for (int j = 0; j < m; ++j) {
                     row.add(sc.nextDouble());
                 }

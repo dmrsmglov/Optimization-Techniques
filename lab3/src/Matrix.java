@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 
 class Matrix {
     private int n;
     private int m;
-    private ArrayList<ArrayList<Double>> matrix;
+    private List<List<Double>> matrix;
 
     Matrix(int n, int m) {
         this.n = n;
@@ -52,7 +53,7 @@ class Matrix {
         m++;
     }
 
-    void addRow(int i, ArrayList<Double> row) {
+    void addRow(int i, List<Double> row) {
         if (row.size() != m) {
             throw new IndexOutOfBoundsException();
         }
@@ -65,7 +66,7 @@ class Matrix {
         }
     }
 
-    void addRow(ArrayList<Double> row) {
+    void addRow(List<Double> row) {
         if (row.size() != m) {
             throw new IndexOutOfBoundsException();
         }
@@ -73,7 +74,7 @@ class Matrix {
         n++;
     }
 
-    void addColumn(int numberOfColumn, ArrayList<Double> column) {
+    void addColumn(int numberOfColumn, List<Double> column) {
         if (column.size() != matrix.size() || numberOfColumn >= m) {
             throw new IndexOutOfBoundsException();
         }
@@ -82,31 +83,30 @@ class Matrix {
         }
     }
 
-    ArrayList<Double> getColumn(int numberOfColumn) {
+    List<Double> getColumn(int numberOfColumn) {
         if (numberOfColumn >= m) {
             throw new IndexOutOfBoundsException();
         }
-        ArrayList<Double> column = new ArrayList<>(0);
+        List<Double> column = new ArrayList<>(0);
         for (int i = 0; i < n; ++i) {
             column.add(getItem(i, numberOfColumn));
         }
         return column;
     }
 
-    ArrayList<Double> getRow(int i) {
+    List<Double> getRow(int i) {
         if (i >= matrix.size()) {
             throw new IndexOutOfBoundsException();
         }
         return matrix.get(i);
     }
 
-
     void concat(Matrix other) {
         if (other.getNumberOfRows() != n) {
             throw new IndexOutOfBoundsException();
         }
         for (int i = 0; i < n; ++i) {
-            ArrayList<Double> currentRow = matrix.get(i);
+            List<Double> currentRow = matrix.get(i);
             for (int j = 0; j < other.getNumberOfColumns(); ++j) {
                 currentRow.add(other.getItem(i, j));
             }

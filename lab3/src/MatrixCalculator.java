@@ -1,11 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class MatrixCalculator {
     private Matrix matrix;
-
-    MatrixCalculator(Matrix matrix) {
-        this.matrix = matrix;
-    }
 
     MatrixCalculator() {
         this.matrix = new Matrix(0, 0);
@@ -16,14 +13,14 @@ public class MatrixCalculator {
     }
 
     void multiplicationSubRow(int row, int begin, int end, int x) {
-        ArrayList<Double> matrixRow = matrix.getRow(row);
+        List<Double> matrixRow = matrix.getRow(row);
         for (int i = begin; i < end; ++i) {
             matrixRow.set(i, matrixRow.get(i) * x);
         }
     }
 
-    ArrayList<Double> divisionColumns(ArrayList<Double> first, ArrayList<Double> second) {
-        ArrayList<Double> result = new ArrayList<>(0);
+    List<Double> divisionColumns(List<Double> first, List<Double> second) {
+        List<Double> result = new ArrayList<>(0);
         for (int i = 0; i < first.size() - 1; ++i) {
             result.add(first.get(i) / (double) first.get(i));
         }
@@ -32,7 +29,7 @@ public class MatrixCalculator {
     }
 
     void divisionSubRowByItem(int row, int begin, int end, double item) {
-        ArrayList<Double> matrixRow = matrix.getRow(row);
+        List<Double> matrixRow = matrix.getRow(row);
         for (int i = begin; i < end; ++i) {
             matrix.setItem(row, i, matrix.getItem(row, i) / item);
         }
@@ -51,7 +48,7 @@ public class MatrixCalculator {
     int findPositiveMaxFromSubRow(int row, int begin, int end) {
         int pos = -1;
         double maxValue = 0;
-        ArrayList<Double> matrixRow = matrix.getRow(row);
+        List<Double> matrixRow = matrix.getRow(row);
         for (int i = begin; i < end; ++i) {
             if (matrixRow.get(i) > 0) {
                 if (pos == -1 || maxValue < matrixRow.get(i)) {
@@ -66,7 +63,7 @@ public class MatrixCalculator {
     int findPositiveMinFromSubColumn(int column, int begin, int end) {
         int pos = -1;
         double minValue = Integer.MAX_VALUE / 2;
-        ArrayList<Double> matrixColumn = matrix.getColumn(column);
+        List<Double> matrixColumn = matrix.getColumn(column);
         for (int i = begin; i < end; ++i) {
             if (matrixColumn.get(i) > 0) {
                 if (pos == -1 || minValue > matrixColumn.get(i)) {
