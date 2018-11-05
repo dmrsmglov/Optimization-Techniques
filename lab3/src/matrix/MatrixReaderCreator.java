@@ -26,4 +26,20 @@ public class MatrixReaderCreator {
         }
         return matrix;
     }
+
+    public Matrix createEmpty(int rows, int columns) {
+        Matrix matrix = new Matrix(rows, columns);
+        try {
+            for (int i = 0; i < rows; ++i) {
+                for (int j = 0; j < columns; j++) {
+                    matrix.addItem(i, j, 0);
+                }
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return matrix;
+    }
 }
