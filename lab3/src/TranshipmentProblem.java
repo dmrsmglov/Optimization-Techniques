@@ -36,12 +36,37 @@ public class TranshipmentProblem {
         for (int i = 0; i < requirementsPotential.size(); i++) {
             requirementsPotential.add(0.);
         }
-
     }
 
+    private void northEastDistribution(){
+        for (int j = 0; j < requirements.size(); ++j) {
+            int i = 0;
+            while (requirements.get(j) > 0) {
+                if (i >= inventory.size()) {
+                    throw new IndexOutOfBoundsException("Problem is not balanced.\n You should add fake vendor.");
+                }
+                if (requirements.get(j) < inventory.get(i)) {
+                    deliveryDistribution.setItem(i, j, requirements.get(j));
+                    inventory.set(i, inventory.get(i) - requirements.get(j));
+                    requirements.set(j, 0.);
+                }
+                else {
+                    deliveryDistribution.setItem(i, j, inventory.get(i));
+                    requirements.set(j, requirements.get(j) - inventory.get(i));
+                    inventory.set(i, 0.);
+                    i++;
+                }
+            }
+        }
+        for (Double anInventory : inventory) {
+            if (anInventory > 0) {
+                throw new IndexOutOfBoundsException("Problem is not balanced.\n You should add fake customer.");
+            }
+        }
+    }
 
     void execute(){
         prepareForExecution();
-
+        northEastDistribution();
     }
 }
