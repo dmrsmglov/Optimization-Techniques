@@ -12,10 +12,10 @@ class SimplexMethod {
     private Matrix matrix = new Matrix(0, 0);
 
     private void createMatrixForExecution() {
-        String fileNameA = "src/resources/A";
-        String fileNameB = "src/resources/B";
-        String fileNameC = "src/resources/C";
-        String fileNameE = "src/resources/E";
+        String fileNameA = "resources/A";
+        String fileNameB = "resources/B";
+        String fileNameC = "resources/C";
+        String fileNameE = "resources/E";
 
         Matrix a = matrixCreator.readAndCreate(fileNameA);
         Matrix b = matrixCreator.readAndCreate(fileNameB);
