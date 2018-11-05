@@ -99,14 +99,58 @@ public class TranshipmentProblem {
         return optimal;
     }
 
+    private void findCycle(List<Integer> cycleRow, List<Integer> cycleColumn) {
+        //TODO how to find cycle
+    }
+
     void execute() {
         prepareForExecution();
         northEastDistribution();
         calculatePotentials();
         markCurrentDistribution();
 
-        /*while (!isOptimal()) {
-            break;
-        }*/
+        while (!isOptimal()) {
+            int minRow = -1;
+            int minColumn = -1;
+            double minValue = Integer.MAX_VALUE / 2;
+
+            for (int i = 0; i < inventory.size(); i++) {
+                for (int j = 0; j < requirements.size(); j++) {
+                    double item = markDistribution.getItem(i, j);
+                    if (item < minValue) {
+                        minRow = i;
+                        minColumn = j;
+                    }
+                }
+            }
+
+            List<Integer> cycleRow = new ArrayList<>();
+            List<Integer> cycleColumn = new ArrayList<>();
+            cycleRow.add(minRow);
+            cycleColumn.add(minColumn);
+
+            findCycle(cycleRow, cycleColumn);
+
+            minValue = Integer.MAX_VALUE / 2;
+            for (int i = 0; i < cycleRow.size(); ++i) {
+                if (i % 2 == 1) {
+                    if (minValue > deliveryDistribution.getItem(cycleRow.get(i), cycleColumn.get(i))) {
+                        minValue = deliveryDistribution.getItem(cycleRow.get(i), cycleColumn.get(i));
+                    }
+                }
+            }
+
+            for (int i = 0; i < cycleRow.size(); ++i) {
+                if (i % 2 == 1) {
+                    deliveryDistribution.setItem(cycleRow.get(i), cycleColumn.get(i),
+                            deliveryDistribution.getItem(cycleRow.get(i), cycleColumn.get(i)) - minValue);
+                }
+                else {
+                    deliveryDistribution.setItem(cycleRow.get(i), cycleColumn.get(i),
+                            deliveryDistribution.getItem(cycleRow.get(i), cycleColumn.get(i)) + minValue);
+                }
+            }
+            markCurrentDistribution();
+        }
     }
 }
