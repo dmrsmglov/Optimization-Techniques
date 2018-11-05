@@ -1,19 +1,21 @@
+import matrix.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 class SimplexMethod {
 
-    private MatrixReaderCreator matrixCreator = new MatrixReaderCreator();
-    private MatrixCalculator matrixCalculator = new MatrixCalculator();
+    private matrix.MatrixReaderCreator matrixCreator = new matrix.MatrixReaderCreator();
+    private matrix.MatrixCalculator matrixCalculator = new matrix.MatrixCalculator();
 
     private Matrix matrix = new Matrix(0, 0);
 
     private void createMatrixForExecution() {
-        String fileNameA = "A";
-        String fileNameB = "B";
-        String fileNameC = "C";
-        String fileNameE = "E";
+        String fileNameA = "src/resources/A";
+        String fileNameB = "src/resources/B";
+        String fileNameC = "src/resources/C";
+        String fileNameE = "src/resources/E";
 
         Matrix a = matrixCreator.readAndCreate(fileNameA);
         Matrix b = matrixCreator.readAndCreate(fileNameB);

@@ -1,3 +1,5 @@
+package matrix;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,7 +8,7 @@ import java.util.Scanner;
 
 public class MatrixReaderCreator {
 
-    Matrix readAndCreate(String filename) {
+    public Matrix readAndCreate(String filename) {
         Matrix matrix = new Matrix(0, 0);
         try (Scanner sc = new Scanner(new File(filename))) {
             int n = sc.nextInt();
