@@ -27,12 +27,12 @@ public class MatrixReaderCreator {
         return matrix;
     }
 
-    public Matrix createEmpty(int rows, int columns) {
+    public Matrix createAndFill(int rows, int columns, double item) {
         Matrix matrix = new Matrix(rows, columns);
         try {
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < columns; j++) {
-                    matrix.addItem(i, j, 0);
+                    matrix.addItem(i, j, item);
                 }
             }
         } catch (IndexOutOfBoundsException ex) {
