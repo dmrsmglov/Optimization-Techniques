@@ -11,5 +11,4 @@ public class MatrixPrinter {
             System.out.println();
         }
     }
-
 }
