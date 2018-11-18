@@ -3,7 +3,7 @@ import matrix.*;
 import java.util.*;
 
 public class TranshipmentProblem {
-    class Pair{
+    private class Pair{
         private int x, y;
         private Pair(int x, int y) {
             this.x = x;
@@ -68,9 +68,9 @@ public class TranshipmentProblem {
             lowerBound = currentMinimum;
             currentMinimum = Integer.MAX_VALUE / 2;
         }
-        for (int i = 0; i < orderOfMinimalCosts.size(); ++i) {
-            int x = orderOfMinimalCosts.get(i).x;
-            int y = orderOfMinimalCosts.get(i).y;
+        for (Pair orderOfMinimalCost : orderOfMinimalCosts) {
+            int x = orderOfMinimalCost.x;
+            int y = orderOfMinimalCost.y;
             if (requirements.get(y) < inventory.get(x)) {
                 deliveryDistribution.setItem(x, y, requirements.get(y));
                 inventory.set(x, inventory.get(x) - requirements.get(y));
@@ -208,7 +208,7 @@ public class TranshipmentProblem {
             Random random = new Random(System.currentTimeMillis());
             int row = random.nextInt(inventory.size());
             int column = random.nextInt(requirements.size());
-            if (deliveryDistribution.getItem(row, column) == 0) {
+            if (deliveryDistribution.getItem(row, column) == 0 && (row != 2 || column != 2)) {
                 deliveryDistribution.setItem(row, column, 1e-3);
             }
         }
@@ -230,7 +230,6 @@ public class TranshipmentProblem {
         makeBalanced();
         calculatePotentials();
         markCurrentDistribution();
-
         while (!isOptimal()) {
             int minRow = -1;
             int minColumn = -1;

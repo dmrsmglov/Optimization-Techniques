@@ -8,6 +8,7 @@ class SimplexMethod {
 
     private matrix.MatrixReaderCreator matrixCreator = new matrix.MatrixReaderCreator();
     private matrix.MatrixCalculator matrixCalculator = new matrix.MatrixCalculator();
+    private matrix.MatrixPrinter matrixPrinter = new MatrixPrinter();
 
     private Matrix matrix = new Matrix(0, 0);
 

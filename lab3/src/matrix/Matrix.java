@@ -44,9 +44,7 @@ public class Matrix {
             throw new IndexOutOfBoundsException();
         }
         matrix.get(row).add(column, item);
-        if (m < matrix.get(row).size()) {
-            m++;
-        }
+        m = Math.max(m, matrix.get(row).size());
     }
 
     public void addItem(int row, double item) {
@@ -54,9 +52,7 @@ public class Matrix {
             throw new IndexOutOfBoundsException();
         }
         matrix.get(row).add(item);
-        if (m < matrix.get(row).size()) {
-            m++;
-        }
+        m = Math.max(m, matrix.get(row).size());
     }
 
     public void addRow(int i, List<Double> row) {
@@ -66,9 +62,7 @@ public class Matrix {
         if (i < matrix.size()) {
             matrix.set(i, row);
         }
-        if (matrix.size() == n) {
-            n++;
-        }
+        n = Math.max(n, matrix.size());
     }
 
     public void addRow(List<Double> row) {
@@ -76,9 +70,7 @@ public class Matrix {
             throw new IndexOutOfBoundsException();
         }
         matrix.add(row);
-        if (n == matrix.size()) {
-            n++;
-        }
+        n = Math.max(n, matrix.size());
     }
 
     public void addColumn(int numberOfColumn, List<Double> column) {
